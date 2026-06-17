@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #693546;
+  background:
+    radial-gradient(circle at top, rgba(255, 234, 239, 0.94), rgba(247, 226, 231, 0.9) 24%, rgba(252, 243, 245, 0.96) 55%, #fffafa 100%);
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+body,
+button,
+input,
+textarea {
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+}
+
+button {
+  border: 0;
+}
+
+a {
+  color: inherit;
+}
