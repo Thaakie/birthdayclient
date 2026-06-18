@@ -1,10 +1,13 @@
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import StoryText from "./StoryText";
 import { TextFlippingBoard } from "./TextFlippingBoard";
 
 function Reward({ progressItems, onComplete }) {
+  const navigate = useNavigate();
+  const [timeLeft, setTimeLeft] = useState(10);
+
   useEffect(() => {
     onComplete();
 
@@ -22,6 +25,14 @@ function Reward({ progressItems, onComplete }) {
     }
     window.bgMusic.play().catch((err) => console.log("Audio play failed:", err));
   }, [onComplete]);
+
+  useEffect(() => {
+    if (timeLeft <= 0) return;
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => prev - 1);
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [timeLeft]);
 
   return (
     <main className="birthday-page">
@@ -100,9 +111,18 @@ function Reward({ progressItems, onComplete }) {
         </div>
 
         <div className="welcome-actions">
-          <Link to="/dashboard" className="primary-button welcome-start">
-            Selanjutnya
-          </Link>
+          <button
+            type="button"
+            className="primary-button welcome-start"
+            onClick={() => {
+              if (timeLeft <= 0) {
+                navigate("/dashboard");
+              }
+            }}
+            disabled={timeLeft > 0}
+          >
+            {timeLeft > 0 ? `Selanjutnya (${timeLeft}s)` : "Selanjutnya"}
+          </button>
         </div>
       </section>
     </main>

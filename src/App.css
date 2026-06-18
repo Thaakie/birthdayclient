@@ -388,6 +388,17 @@
   transform: translateY(-1px);
 }
 
+.welcome-start:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+  box-shadow: none !important;
+  transform: none !important;
+  background: rgba(242, 138, 165, 0.4) !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  border-color: rgba(223, 171, 183, 0.3) !important;
+}
+
 .cake-showcase {
   position: relative;
   display: grid;
