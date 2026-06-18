@@ -9,7 +9,7 @@ function LoveLetter({ progressItems }) {
 
       <section className="shell-card page-scene">
         <div className="section-heading reveal reveal-1">
-          <p className="eyebrow">Final route</p>
+          
           <h2>A Secret Note</h2>
           <StoryText
             text="The last page stays separate so it feels more intimate, like opening the final envelope after the rest of the journey."

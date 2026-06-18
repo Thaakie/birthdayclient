@@ -59,7 +59,7 @@ function Games({ progressItems, onComplete }) {
 
       <section className="shell-card page-scene quiz-scene">
         <div className="section-heading reveal reveal-1">
-          <p className="eyebrow">Route two</p>
+        
           <h2>Birthday Questions</h2>
           <StoryText
             text="Answer them one by one. The next page only opens after every answer is correct."
@@ -110,12 +110,7 @@ function Games({ progressItems, onComplete }) {
               })}
             </div>
 
-            {isComplete ? (
-              <div className="quiz-success">
-                <strong>All answers correct.</strong>
-                <p>The reward page is unlocked now.</p>
-              </div>
-            ) : null}
+
           </article>
         </div>
 

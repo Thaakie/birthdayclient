@@ -14,7 +14,7 @@ function Reward({ progressItems, onComplete }) {
 
       <section className="shell-card reward-card page-scene">
         <div className="section-heading reveal reveal-1">
-          <p className="eyebrow">Route three</p>
+         
           <h2>Your Little Reward</h2>
           <StoryText
             text="A small in-between page before the main dashboard opens. Think of it as a soft pause."
