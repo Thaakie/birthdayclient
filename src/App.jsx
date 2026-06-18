@@ -7,6 +7,7 @@ import LoveLetter from "./components/LoveLetter";
 import Reward from "./components/Reward";
 import Welcome from "./components/Welcome";
 import Angry from "./components/Angry";
+import LineTransition from "./components/LineTransition";
 import "./App.css";
 
 const routeFlow = [
@@ -28,9 +29,32 @@ function BirthdayRouter() {
     return Number.isFinite(parsed) ? parsed : 0;
   });
 
+  const [displayLocation, setDisplayLocation] = useState(location);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [transitionIndices, setTransitionIndices] = useState({ from: 0, to: 0 });
+
   useEffect(() => {
     window.localStorage.setItem(storageKey, String(furthestStep));
   }, [furthestStep]);
+
+  useEffect(() => {
+    const fromIdx = routeFlow.findIndex((r) => r.path === displayLocation.pathname);
+    const toIdx = routeFlow.findIndex((r) => r.path === location.pathname);
+
+    // If both are valid, distinct steps in the flow, play the line transition animation
+    if (fromIdx !== -1 && toIdx !== -1 && fromIdx !== toIdx) {
+      setTransitionIndices({ from: fromIdx, to: toIdx });
+      setIsTransitioning(true);
+    } else {
+      // Direct jump (e.g. /angry or initial load)
+      setDisplayLocation(location);
+    }
+  }, [location]);
+
+  const handleTransitionComplete = () => {
+    setDisplayLocation(location);
+    setIsTransitioning(false);
+  };
 
   const currentIndex = routeFlow.findIndex((route) => route.path === location.pathname);
   const safeIndex = currentIndex === -1 ? 0 : currentIndex;
@@ -56,62 +80,71 @@ function BirthdayRouter() {
   }
 
   return (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <Welcome
-            progressItems={progressItems}
-            onComplete={() => markComplete("/")}
-          />
-        }
+    <>
+      <Routes location={displayLocation}>
+        <Route
+          path="/"
+          element={
+            <Welcome
+              progressItems={progressItems}
+              onComplete={() => markComplete("/")}
+            />
+          }
+        />
+        <Route
+          path="/games"
+          element={
+            <Games
+              progressItems={progressItems}
+              onComplete={() => markComplete("/games")}
+            />
+          }
+        />
+        <Route
+          path="/reward"
+          element={
+            <Reward
+              progressItems={progressItems}
+              onComplete={() => markComplete("/reward")}
+            />
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <Dashboard
+              progressItems={progressItems}
+              onComplete={() => markComplete("/dashboard")}
+            />
+          }
+        />
+        <Route
+          path="/gallery"
+          element={
+            <Gallery
+              progressItems={progressItems}
+              onComplete={() => markComplete("/gallery")}
+            />
+          }
+        />
+        <Route
+          path="/love-letter"
+          element={<LoveLetter progressItems={progressItems} />}
+        />
+        <Route
+          path="/angry"
+          element={<Angry />}
+        />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+
+      <LineTransition
+        isTransitioning={isTransitioning}
+        fromIndex={transitionIndices.from}
+        toIndex={transitionIndices.to}
+        onComplete={handleTransitionComplete}
       />
-      <Route
-        path="/games"
-        element={
-          <Games
-            progressItems={progressItems}
-            onComplete={() => markComplete("/games")}
-          />
-        }
-      />
-      <Route
-        path="/reward"
-        element={
-          <Reward
-            progressItems={progressItems}
-            onComplete={() => markComplete("/reward")}
-          />
-        }
-      />
-      <Route
-        path="/dashboard"
-        element={
-          <Dashboard
-            progressItems={progressItems}
-            onComplete={() => markComplete("/dashboard")}
-          />
-        }
-      />
-      <Route
-        path="/gallery"
-        element={
-          <Gallery
-            progressItems={progressItems}
-            onComplete={() => markComplete("/gallery")}
-          />
-        }
-      />
-      <Route
-        path="/love-letter"
-        element={<LoveLetter progressItems={progressItems} />}
-      />
-      <Route
-        path="/angry"
-        element={<Angry />}
-      />
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+    </>
   );
 }
 

@@ -2250,3 +2250,110 @@ h2 {
     opacity: 1;
   }
 }
+
+/* Line Transition Overlay Styles */
+.transition-overlay-backdrop {
+  position: fixed;
+  inset: 0;
+  background: #f7e2e7;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.transition-overlay-content {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  padding: 20px;
+}
+
+.transition-title {
+  font-family: 'Kaushan Script', cursive !important;
+  font-weight: 400 !important;
+  font-size: 2.5rem;
+  color: #813549;
+  margin: 0;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(129, 53, 73, 0.05);
+}
+
+.transition-svg-container {
+  position: relative;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(223, 171, 183, 0.35);
+  border-radius: 24px;
+  padding: 40px 24px;
+  box-shadow: 
+    0 16px 40px rgba(129, 53, 73, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  box-sizing: border-box;
+}
+
+.transition-svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* Burst Particle Animations */
+.burst-particles {
+  position: absolute;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.burst-heart {
+  position: absolute;
+  font-size: 1.4rem;
+  animation: burstOut 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  opacity: 0;
+}
+
+.burst-heart.h1 { --dx: -45px; --dy: -45px; animation-delay: 0s; }
+.burst-heart.h2 { --dx: 45px; --dy: -35px; animation-delay: 0.05s; }
+.burst-heart.h3 { --dx: -30px; --dy: 45px; animation-delay: 0.1s; }
+.burst-heart.h4 { --dx: 35px; --dy: 35px; animation-delay: 0.08s; }
+.burst-heart.h5 { --dx: 0px; --dy: -55px; animation-delay: 0.02s; }
+
+@keyframes burstOut {
+  0% {
+    transform: translate(-50%, -50%) scale(0.3);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.1);
+    opacity: 0;
+  }
+}
+
+/* Active node pulse effect in transition */
+@keyframes nodePulse {
+  0% {
+    r: 12;
+    stroke-width: 2.5;
+    stroke-opacity: 1;
+  }
+  50% {
+    r: 15;
+    stroke-width: 4;
+    stroke-opacity: 0.6;
+  }
+  100% {
+    r: 12;
+    stroke-width: 2.5;
+    stroke-opacity: 1;
+  }
+}
+
+.active-node-pulse {
+  animation: nodePulse 1.2s infinite ease-in-out;
+}
