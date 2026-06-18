@@ -2287,14 +2287,7 @@ h2 {
 .transition-svg-container {
   position: relative;
   width: 100%;
-  background: rgba(255, 255, 255, 0.45);
-  border: 1px solid rgba(223, 171, 183, 0.35);
-  border-radius: 24px;
-  padding: 40px 24px;
-  box-shadow: 
-    0 16px 40px rgba(129, 53, 73, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(8px);
+  padding: 40px 0;
   box-sizing: border-box;
 }
 
