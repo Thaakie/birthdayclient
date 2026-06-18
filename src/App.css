@@ -79,13 +79,21 @@
 
 .welcome-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.28fr) minmax(240px, 0.72fr);
-  gap: 22px;
+  grid-template-columns: 1fr;
+  max-width: 560px;
+  gap: 0;
   align-items: center;
   justify-content: center;
   width: min(100%, 1120px);
   margin: 0 auto;
   text-align: left;
+  transition: grid-template-columns 0.8s cubic-bezier(0.25, 1, 0.36, 1), max-width 0.8s cubic-bezier(0.25, 1, 0.36, 1), gap 0.8s cubic-bezier(0.25, 1, 0.36, 1);
+}
+
+.welcome-layout.is-open {
+  grid-template-columns: minmax(0, 1.28fr) minmax(240px, 0.72fr);
+  max-width: 1120px;
+  gap: 22px;
 }
 
 .welcome-note {
@@ -216,7 +224,7 @@
 /* Guide Arrow Styles */
 .envelope-guide {
   position: absolute;
-  top: -55px;
+  top: -20px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -248,14 +256,36 @@
 }
 
 .envelope-letter h1 {
-  color: #8f4456;
-  font-size: clamp(2rem, 4vw, 3.2rem);
+  color: #813549;
+  font-family: Georgia, serif;
+  font-size: clamp(2.3rem, 5vw, 3.2rem);
+  font-weight: 700;
+  margin: 0 0 20px;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  text-align: center;
+}
+
+.envelope-letter .eyebrow {
+  color: #af5d72;
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  margin-bottom: 12px;
   text-align: center;
 }
 
 .envelope-letter .hero-copy,
 .envelope-letter .story-text {
+  font-size: 0.96rem;
+  line-height: 1.75;
+  color: #6a4c56;
+  margin-bottom: 16px;
   text-align: center;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .welcome-actions {
@@ -309,7 +339,7 @@
 .back-button-tab {
   min-width: 58px;
   min-height: 172px;
-  padding: 16px 10px 16px 24px;
+  padding: 16px 16px;
   writing-mode: vertical-rl;
   text-orientation: mixed;
   letter-spacing: 0.04em;
@@ -341,7 +371,7 @@
 .welcome-start {
   min-width: 58px;
   min-height: 172px;
-  padding: 16px 24px 16px 10px;
+  padding: 16px 16px;
   writing-mode: vertical-rl;
   text-orientation: mixed;
   letter-spacing: 0.04em;
@@ -349,6 +379,9 @@
   box-shadow:
     0 14px 28px rgba(242, 138, 165, 0.24),
     0 0 0 1px rgba(244, 173, 195, 0.5);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .welcome-start:hover:not(:disabled) {
@@ -1299,8 +1332,10 @@
   }
 
   .welcome-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
+    max-width: 100% !important;
     justify-items: center;
+    gap: 28px !important;
   }
 
   .welcome-scene,
@@ -1667,5 +1702,551 @@
     align-items: flex-start;
     text-align: left;
     width: auto;
+  }
+}
+
+/* Floating Polaroid Photos on Reward Page */
+.floating-photo-container-left,
+.floating-photo-container-right {
+  position: absolute;
+  width: 75px;
+  background-color: #fff;
+  padding: 4px 4px 12px 4px;
+  box-shadow: 0 6px 16px rgba(125, 64, 83, 0.14);
+  border: 1px solid rgba(223, 171, 183, 0.22);
+  border-radius: 4px;
+  z-index: 3;
+}
+
+.floating-photo-container-left {
+  left: -24px;
+  top: -20px;
+  transform: rotate(-12deg);
+}
+
+.floating-photo-container-right {
+  right: -24px;
+  top: -10px;
+  transform: rotate(14deg);
+}
+
+.floating-photo-img {
+  width: 100%;
+  height: 65px;
+  object-fit: cover;
+  border-radius: 2px;
+  display: block;
+}
+
+@media (max-width: 720px) {
+  .floating-photo-container-left {
+    left: -15px;
+    top: -45px;
+    width: 55px;
+    padding: 3px 3px 9px 3px;
+  }
+  .floating-photo-container-right {
+    right: -15px;
+    top: -35px;
+    width: 55px;
+    padding: 3px 3px 9px 3px;
+  }
+  .floating-photo-img {
+    height: 48px;
+  }
+}
+
+/* Global Romantic Cursive Override */
+h2 {
+  font-family: 'Kaushan Script', cursive !important;
+  font-weight: 400 !important;
+  color: #813549;
+  letter-spacing: 0.01em;
+}
+
+.envelope-letter h1 {
+  font-family: 'Kaushan Script', cursive !important;
+  font-weight: 400 !important;
+  font-size: clamp(2.6rem, 6vw, 3.6rem) !important;
+  color: #813549;
+  letter-spacing: 0.02em;
+}
+
+/* Love Letter Page CSS */
+.love-letter-page-bg {
+  background: #f7e2e7 !important; /* Soft romantic pink matching previous pages */
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 16px 80px;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.love-letter-flow-container {
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.envelope-wrapper-romantic {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  margin: 20px auto 0;
+  z-index: 2;
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.36, 1);
+}
+
+.envelope-wrapper-romantic.is-open {
+  transform: translateY(45px);
+}
+
+/* Envelope Back Background */
+.envelope-back-bg {
+  position: absolute;
+  top: 60px;
+  left: 10px;
+  right: 10px;
+  bottom: 0;
+  background: #e8e3cf; /* Vintage warm envelope color */
+  border-radius: 6px;
+  z-index: 1;
+  box-shadow: 
+    0 12px 30px rgba(0, 0, 0, 0.1),
+    inset 0 0 40px rgba(0, 0, 0, 0.05);
+}
+
+.envelope-flap-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 250px solid transparent;
+  border-right: 250px solid transparent;
+  border-bottom: 60px solid #dad4be; /* Darker interior shading */
+  transform-origin: bottom;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), border-bottom-color 0.6s ease;
+  z-index: 4;
+}
+
+.envelope-wrapper-romantic.is-closed .envelope-flap-top {
+  transform: rotateX(180deg) translateY(-69px);
+  border-bottom-color: #e8e3cf; /* Outer color when folded down */
+  z-index: 5;
+}
+
+@media (max-width: 520px) {
+  .envelope-flap-top {
+    border-left-width: calc(50vw - 16px) !important;
+    border-right-width: calc(50vw - 16px) !important;
+  }
+}
+
+/* Stamp Letter Paper styling */
+.stamp-letter {
+  position: relative;
+  background: #fdf9ee;
+  padding: 46px 42px 64px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 2;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  transform: translateY(0);
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.36, 1), opacity 0.8s ease, filter 0.8s ease;
+}
+
+.envelope-wrapper-romantic.is-closed .stamp-letter {
+  transform: translateY(180px) scale(0.95);
+  opacity: 0;
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+.envelope-wrapper-romantic.is-open .stamp-letter {
+  transform: translateY(-90px) scale(1);
+  opacity: 1;
+  filter: blur(0px);
+}
+
+/* Wavy cutout border - matching soft pink background #f7e2e7 */
+.stamp-letter::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  pointer-events: none;
+  z-index: 5;
+  background-image:
+    radial-gradient(circle, #f7e2e7 5px, transparent 6px), /* Top */
+    radial-gradient(circle, #f7e2e7 5px, transparent 6px), /* Bottom */
+    radial-gradient(circle, #f7e2e7 5px, transparent 6px), /* Left */
+    radial-gradient(circle, #f7e2e7 5px, transparent 6px); /* Right */
+  background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+  background-position: 
+    0px 0px,         /* Top */
+    0px 100%,        /* Bottom */
+    0px 0px,         /* Left */
+    100% 0px;        /* Right */
+  background-size: 
+    16px 16px,
+    16px 16px,
+    16px 16px,
+    16px 16px;
+}
+
+/* Metadata Row (TO/FROM) */
+.letter-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 20px;
+  gap: 16px;
+}
+
+.letter-metadata {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-grow: 1;
+}
+
+.meta-field {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  border-bottom: 1.5px solid rgba(122, 29, 36, 0.45);
+  padding-bottom: 2px;
+  max-width: 180px;
+}
+
+.meta-label {
+  font-family: Georgia, serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #7a1d24;
+  letter-spacing: 0.05em;
+}
+
+.meta-value {
+  font-family: 'Kaushan Script', cursive;
+  font-size: 1.35rem;
+  color: #7a1d24;
+}
+
+/* Mini Stamps styling */
+.letter-stamps {
+  display: flex;
+  gap: 12px;
+}
+
+.mini-stamp {
+  width: 68px;
+  height: 86px;
+  background: #fff;
+  padding: 4px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+.mini-stamp::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle, #fdf9ee 2px, transparent 2.5px),
+    radial-gradient(circle, #fdf9ee 2px, transparent 2.5px),
+    radial-gradient(circle, #fdf9ee 2px, transparent 2.5px),
+    radial-gradient(circle, #fdf9ee 2px, transparent 2.5px);
+  background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+  background-position: 0 0, 0 100%, 0 0, 100% 0;
+  background-size: 7px 7px;
+}
+
+.mini-stamp img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.love-letter-subheader {
+  font-family: 'Kaushan Script', cursive;
+  font-size: 2.3rem;
+  color: #7a1d24;
+  text-align: center;
+  margin: 28px 0 20px;
+}
+
+.letter-body-content {
+  font-family: Georgia, serif;
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: #5d3d45;
+  text-align: justify;
+  text-justify: inter-word;
+  margin-bottom: 28px;
+}
+
+.letter-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+
+.signature {
+  font-family: 'Kaushan Script', cursive;
+  font-size: 1.45rem;
+  color: #7a1d24;
+}
+
+/* Made with Love Stamp */
+.made-with-love-stamp {
+  position: absolute;
+  bottom: 24px;
+  right: 28px;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+/* Envelope Front Foreground Cover */
+.envelope-front-fg {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 0;
+  height: 120px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.envelope-pocket-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0;
+  width: 0;
+  border-left: 250px solid #eae6df;
+  border-right: 250px solid #eae6df;
+  border-top: 120px solid transparent;
+  filter: drop-shadow(0 -6px 12px rgba(0,0,0,0.1));
+}
+
+@media (max-width: 520px) {
+  .envelope-pocket-bottom {
+    border-left-width: calc(50vw - 16px) !important;
+    border-right-width: calc(50vw - 16px) !important;
+  }
+}
+
+/* Wax Seal Heart Button */
+.heart-wax-seal {
+  position: absolute;
+  left: 50%;
+  bottom: 105px;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  background: #a31a29; /* Red wax color */
+  border-radius: 50%;
+  box-shadow: 
+    0 4px 10px rgba(0,0,0,0.2),
+    inset 0 2px 4px rgba(255,255,255,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  pointer-events: auto;
+  z-index: 4;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.36, 1), opacity 0.4s ease;
+}
+
+.envelope-wrapper-romantic.is-open .heart-wax-seal {
+  transform: translate(-50%, 40px) scale(0.9);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.seal-heart-shape {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  background: #7d0d1a;
+  transform: rotate(-45deg);
+  margin-top: 4px;
+}
+
+.seal-heart-shape::before,
+.seal-heart-shape::after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background: #7d0d1a;
+  border-radius: 50%;
+}
+
+.seal-heart-shape::before {
+  top: -12px;
+  left: 0;
+}
+
+.seal-heart-shape::after {
+  top: 0;
+  left: 12px;
+}
+
+/* Inline Action Buttons below envelope */
+.love-letter-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  width: 100%;
+  max-width: 400px;
+  margin-top: 15px; /* Spaced neatly under the vertically translated envelope */
+  margin-bottom: 40px;
+  padding: 0 16px;
+  box-sizing: border-box;
+  z-index: 10;
+}
+
+.love-letter-btn-primary,
+.love-letter-btn-secondary {
+  /* Reset writing mode and orientation */
+  writing-mode: horizontal-tb !important;
+  text-orientation: mixed !important;
+  /* Reset dimensions */
+  min-width: 140px !important;
+  min-height: 44px !important;
+  height: 44px !important;
+  padding: 10px 24px !important;
+  border-radius: 30px !important; /* Elegant rounded pills */
+  font-family: inherit !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.03em !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  transition: all 0.25s ease !important;
+}
+
+.love-letter-btn-primary {
+  background: #813549 !important;
+  color: #fff !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(129, 53, 73, 0.25) !important;
+}
+
+.love-letter-btn-primary:hover {
+  background: #984960 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 16px rgba(129, 53, 73, 0.35) !important;
+}
+
+.love-letter-btn-secondary {
+  background: rgba(255, 255, 255, 0.72) !important;
+  color: #813549 !important;
+  border: 1px solid rgba(129, 53, 73, 0.35) !important;
+  box-shadow: 0 4px 12px rgba(129, 53, 73, 0.05) !important;
+}
+
+.love-letter-btn-secondary:hover {
+  background: #fff !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 16px rgba(129, 53, 73, 0.12) !important;
+}
+
+@media (max-width: 520px) {
+  .stamp-letter {
+    padding: 36px 24px 56px;
+  }
+  .love-letter-subheader {
+    font-size: 1.85rem;
+  }
+  .letter-body-content {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+  .mini-stamp {
+    width: 55px;
+    height: 70px;
+  }
+  .love-letter-actions {
+    margin-top: 10px;
+  }
+}
+
+/* Correct Answer Toast Styles */
+.correct-toast-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 250, 251, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.correct-toast-content {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(223, 171, 183, 0.55);
+  border-radius: 20px;
+  padding: 24px 32px;
+  box-shadow: 0 12px 36px rgba(129, 53, 73, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+  max-width: 280px;
+  animation: toastBounceIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.correct-toast-image {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 16px;
+  border: 4px solid #fff;
+  box-shadow: 0 4px 12px rgba(129, 53, 73, 0.12);
+}
+
+.correct-toast-content h3 {
+  font-family: 'Kaushan Script', cursive !important;
+  font-weight: 400 !important;
+  font-size: 1.8rem;
+  color: #813549;
+  margin: 0;
+}
+
+@keyframes toastBounceIn {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
   }
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import StoryText from "./StoryText";
@@ -12,14 +12,33 @@ function Welcome({ onComplete }) {
     if (isOpened) return;
     setIsOpened(true);
 
-    // Play music globally (stored on window to avoid duplicates)
+    // Play Coldplay - Sparks globally (stored on window to avoid duplicates)
+    const trackUrl = "/@coldplay  - Sparks (Lyrics).mp3";
     if (!window.bgMusic) {
-      window.bgMusic = new Audio("https://upload.wikimedia.org/wikipedia/commons/3/3d/Nocturne_in_E_flat_major%2C_Op._9_no._2.mp3");
+      window.bgMusic = new Audio(trackUrl);
       window.bgMusic.loop = true;
       window.bgMusic.volume = 0.45; // Sweet, soft background volume
+    } else {
+      const currentSrc = decodeURIComponent(window.bgMusic.src);
+      if (!currentSrc.includes(trackUrl)) {
+        window.bgMusic.src = trackUrl;
+      }
     }
     window.bgMusic.play().catch((err) => console.log("Audio play failed:", err));
   };
+
+  useEffect(() => {
+    if (isOpened) {
+      const trackUrl = "/@coldplay  - Sparks (Lyrics).mp3";
+      if (window.bgMusic) {
+        const currentSrc = decodeURIComponent(window.bgMusic.src);
+        if (!currentSrc.includes(trackUrl)) {
+          window.bgMusic.src = trackUrl;
+          window.bgMusic.play().catch((err) => console.log("Audio play failed:", err));
+        }
+      }
+    }
+  }, [isOpened]);
 
   const handleStart = () => {
     if (isLeaving) {
@@ -38,8 +57,17 @@ function Welcome({ onComplete }) {
     <main className="birthday-page">
       <div className="floating-hearts" aria-hidden="true" />
 
-      <section className="hero-card welcome-scene page-scene">
-        <div className="welcome-layout">
+      <motion.section
+        className="hero-card welcome-scene page-scene"
+        initial={false}
+        animate={
+          isLeaving
+            ? { opacity: 0, y: -15, scale: 0.985, filter: "blur(1px)" }
+            : { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }
+        }
+        transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <div className={`welcome-layout ${isOpened ? "is-open" : "is-closed"}`}>
           <motion.div
             className={`welcome-note reveal reveal-2 ${isOpened ? "is-open" : "is-closed"}`}
             onClick={handleOpenEnvelope}
@@ -75,7 +103,7 @@ function Welcome({ onComplete }) {
                     exit={{ opacity: 0, y: -10, x: "-50%" }}
                     transition={{ duration: 0.3 }}
                   >
-                    <span>Buka suratnya disini 💌</span>
+                    <span>Buka suratnya disini</span>
                     <svg className="guide-arrow" viewBox="0 0 24 24">
                       <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
                     </svg>
@@ -112,32 +140,35 @@ function Welcome({ onComplete }) {
             </div>
           </motion.div>
 
-          <motion.div
-            className="cake-showcase reveal reveal-3"
-            aria-hidden="true"
-            initial={false}
-            animate={
-              isLeaving
-                ? { x: 28, opacity: 0.18, scale: 0.95, rotate: 4 }
-                : { x: 0, opacity: 1, scale: 1, rotate: 0 }
-            }
-            transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <div className="cake-glow" />
-            <div className="cake-card">
-              <div className="cake-candle">
-                <span className="candle-flame" />
-              </div>
-              <div className="cake-top">
-                <span className="frosting-dot frosting-dot-left" />
-                <span className="frosting-dot frosting-dot-right" />
-              </div>
-              <div className="cake-middle" />
-              <div className="cake-bottom" />
-              <div className="cake-plate" />
-            </div>
-            <p className="cake-caption">A tiny cake beside your letter.</p>
-          </motion.div>
+          <AnimatePresence>
+            {isOpened && (
+              <motion.div
+                className="cake-showcase"
+                initial={{ opacity: 0, scale: 0.82, x: 50 }}
+                animate={{ opacity: 1, scale: 1, x: 0 }}
+                exit={{ opacity: 0, scale: 0.82, x: 50 }}
+                transition={{ duration: 0.68, ease: [0.22, 1, 0.36, 1], delay: 0.22 }}
+                aria-hidden="true"
+              >
+                <div className="cake-glow" />
+                <div className="cake-card" style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "12px", height: "300px" }}>
+                  <img 
+                    src="/caku.jpg" 
+                    alt="Cake" 
+                    style={{ 
+                      width: "100%", 
+                      height: "240px", 
+                      objectFit: "cover", 
+                      borderRadius: "8px",
+                      boxShadow: "0 4px 10px rgba(0,0,0,0.08)"
+                    }} 
+                  />
+                  <div className="cake-plate" style={{ position: "relative", bottom: "0", marginTop: "8px" }} />
+                </div>
+                <p className="cake-caption">A tiny cake beside your letter.</p>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* Start button only fades in after envelope is opened */}
@@ -161,7 +192,7 @@ function Welcome({ onComplete }) {
             </motion.div>
           )}
         </AnimatePresence>
-      </section>
+      </motion.section>
     </main>
   );
 }

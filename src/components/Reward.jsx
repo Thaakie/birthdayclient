@@ -1,11 +1,26 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import StoryText from "./StoryText";
 import { TextFlippingBoard } from "./TextFlippingBoard";
 
 function Reward({ progressItems, onComplete }) {
   useEffect(() => {
     onComplete();
+
+    // Play The 1975 - About You globally on mount
+    const trackUrl = "/The 1975 - About You (Official).mp3";
+    if (!window.bgMusic) {
+      window.bgMusic = new Audio(trackUrl);
+      window.bgMusic.loop = true;
+      window.bgMusic.volume = 0.45;
+    } else {
+      const currentSrc = decodeURIComponent(window.bgMusic.src);
+      if (!currentSrc.includes(trackUrl)) {
+        window.bgMusic.src = trackUrl;
+      }
+    }
+    window.bgMusic.play().catch((err) => console.log("Audio play failed:", err));
   }, [onComplete]);
 
   return (
@@ -13,8 +28,47 @@ function Reward({ progressItems, onComplete }) {
       <div className="floating-hearts" aria-hidden="true" />
 
       <section className="shell-card reward-card page-scene">
-        <div className="section-heading reveal reveal-1">
-         
+        <div className="section-heading reveal reveal-1" style={{ position: "relative" }}>
+          {/* Left Floating Photo */}
+          <motion.div
+            className="floating-photo-container-left"
+            animate={{
+              y: [0, -8, 0],
+              rotate: [-12, -9, -12]
+            }}
+            transition={{
+              duration: 4,
+              ease: "easeInOut",
+              repeat: Infinity
+            }}
+          >
+            <img
+              src="/bungu.jpg"
+              alt="Photo Left"
+              className="floating-photo-img"
+            />
+          </motion.div>
+
+          {/* Right Floating Photo */}
+          <motion.div
+            className="floating-photo-container-right"
+            animate={{
+              y: [0, -10, 0],
+              rotate: [14, 11, 14]
+            }}
+            transition={{
+              duration: 3.5,
+              ease: "easeInOut",
+              repeat: Infinity
+            }}
+          >
+            <img
+              src="/bungu.jpg"
+              alt="Photo Right"
+              className="floating-photo-img"
+            />
+          </motion.div>
+
           <h2>Your Little Reward</h2>
           <StoryText
             text="A small in-between page before the main dashboard opens. Think of it as a soft pause."
@@ -47,7 +101,7 @@ function Reward({ progressItems, onComplete }) {
 
         <div className="welcome-actions">
           <Link to="/dashboard" className="primary-button welcome-start">
-            Ke Dashboard
+            Selanjutnya
           </Link>
         </div>
       </section>

@@ -59,7 +59,7 @@ function Gallery({ progressItems, onComplete }) {
 
         <div className="welcome-actions">
           <Link to="/love-letter" className="primary-button welcome-start">
-            Ke Surat Cinta
+            Selanjutnya
           </Link>
         </div>
       </section>

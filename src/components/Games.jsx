@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import { questions } from "../data/questions";
 import StoryText from "./StoryText";
 
@@ -7,6 +8,7 @@ function Games({ progressItems, onComplete }) {
   const navigate = useNavigate();
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [wrongPopup, setWrongPopup] = useState(null);
+  const [correctToast, setCorrectToast] = useState(false);
   const [selectedChoice, setSelectedChoice] = useState("");
   const [isComplete, setIsComplete] = useState(false);
   const [lives, setLives] = useState(3);
@@ -38,19 +40,23 @@ function Games({ progressItems, onComplete }) {
       return;
     }
 
+    setCorrectToast(true);
+
     if (activeQuestion === questions.length - 1) {
       setIsComplete(true);
       onComplete();
       window.setTimeout(() => {
+        setCorrectToast(false);
         navigate("/reward");
-      }, 700);
+      }, 2000);
       return;
     }
 
     window.setTimeout(() => {
+      setCorrectToast(false);
       setSelectedChoice("");
       setActiveQuestion((current) => current + 1);
-    }, 450);
+    }, 2000);
   };
 
   return (
@@ -77,41 +83,47 @@ function Games({ progressItems, onComplete }) {
           <div className="quiz-counter">Question {progressLabel}</div>
         </div>
 
-        <div className="question-shell question-shell-game reveal reveal-3">
-          <article className="question-card question-card-game">
-            <span className="story-badge">Question {currentQuestion.id}</span>
-            <h3>{currentQuestion.prompt}</h3>
-            <StoryText
+        <div className="question-shell question-shell-game reveal reveal-3" style={{ position: "relative", overflow: "hidden", minHeight: "350px" }}>
+          <AnimatePresence mode="wait">
+            <motion.article
               key={currentQuestion.id}
-              text={currentQuestion.hint}
-              className="quiz-hint"
-              delay={120}
-              speed={60}
-            />
+              className="question-card question-card-game"
+              initial={{ opacity: 0, x: 20, filter: "blur(2px)" }}
+              animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+              exit={{ opacity: 0, x: -20, filter: "blur(2px)" }}
+              transition={{ duration: 0.35, ease: "easeInOut" }}
+            >
+              <span className="story-badge">Question {currentQuestion.id}</span>
+              <h3>{currentQuestion.prompt}</h3>
+              <StoryText
+                text={currentQuestion.hint}
+                className="quiz-hint"
+                delay={120}
+                speed={60}
+              />
 
-            <div className="quiz-choice-grid">
-              {currentQuestion.choices.map((choice) => {
-                const isActive = selectedChoice === choice;
-                const isCorrect =
-                  selectedChoice === currentQuestion.correctChoice &&
-                  choice === currentQuestion.correctChoice;
+              <div className="quiz-choice-grid">
+                {currentQuestion.choices.map((choice) => {
+                  const isActive = selectedChoice === choice;
+                  const isCorrect =
+                    selectedChoice === currentQuestion.correctChoice &&
+                    choice === currentQuestion.correctChoice;
 
-                return (
-                  <button
-                    key={choice}
-                    type="button"
-                    className={`quiz-choice ${isActive ? "is-active" : ""} ${isCorrect ? "is-correct" : ""}`}
-                    onClick={() => handleChoice(choice)}
-                    disabled={isComplete}
-                  >
-                    {choice}
-                  </button>
-                );
-              })}
-            </div>
-
-
-          </article>
+                  return (
+                    <button
+                      key={choice}
+                      type="button"
+                      className={`quiz-choice ${isActive ? "is-active" : ""} ${isCorrect ? "is-correct" : ""}`}
+                      onClick={() => handleChoice(choice)}
+                      disabled={isComplete}
+                    >
+                      {choice}
+                    </button>
+                  );
+                })}
+              </div>
+            </motion.article>
+          </AnimatePresence>
         </div>
 
         <div className="back-actions">
@@ -130,6 +142,20 @@ function Games({ progressItems, onComplete }) {
             aria-labelledby="wrong-answer-title"
           >
             <p className="quiz-popup-kicker">Wrong answer</p>
+            <div style={{ margin: "12px auto 16px", display: "flex", justifyContent: "center" }}>
+              <img
+                src="/nangus.jpg"
+                alt="Nangis"
+                style={{
+                  width: "140px",
+                  height: "140px",
+                  objectFit: "cover",
+                  borderRadius: "12px",
+                  border: "4px solid #fff",
+                  boxShadow: "0 6px 16px rgba(125, 64, 83, 0.15)"
+                }}
+              />
+            </div>
             <h3 id="wrong-answer-title">{wrongPopup.title}</h3>
             <p>{wrongPopup.message}</p>
             <p className="quiz-popup-hint">Hint: {wrongPopup.hint}</p>
@@ -146,6 +172,15 @@ function Games({ progressItems, onComplete }) {
           </div>
         </div>
       ) : null}
+
+      {correctToast && (
+        <div className="correct-toast-backdrop">
+          <div className="correct-toast-content">
+            <img src="/lovu.jpg" alt="Correct Answer" className="correct-toast-image" />
+            <h3>Correct! ❤️</h3>
+          </div>
+        </div>
+      )}
     </main>
   );
 }

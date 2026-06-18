@@ -83,7 +83,7 @@ function Dashboard({ progressItems, onComplete }) {
       <section className="shell-card page-scene">
         <div className="section-heading reveal reveal-1">
           
-          <h2>Birthday Dashboard</h2>
+          <h2>Our Story Timeline</h2>
           <StoryText
             text="This page works like the route map, but still follows your locked flow. Later pages stay unavailable until this one is finished."
             delay={150}
@@ -198,7 +198,7 @@ function Dashboard({ progressItems, onComplete }) {
 
         {/* Bottom panel: Full-width Wish Generator */}
         <div className="panel wish-panel reveal reveal-4">
-          <h3>A Little Wish for You 💌</h3>
+          <h3>A Little Wish for You</h3>
           <div className={`wish-text ${isFading ? "fade-out" : ""}`}>
             {wishes[currentWishIndex]}
           </div>
@@ -215,7 +215,7 @@ function Dashboard({ progressItems, onComplete }) {
 
         <div className="welcome-actions">
           <Link to="/gallery" className="primary-button welcome-start">
-            Ke Gallery
+            Selanjutnya
           </Link>
         </div>
       </section>
