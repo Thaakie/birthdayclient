@@ -1,42 +1,55 @@
 export const questions = [
   {
-    id: "A",
-    prompt: "Which dessert feels the most like our soft little date vibe?",
-    choices: ["Chocolate", "Tiramisu", "Popcorn", "Cheeseburger"],
-    correctChoice: "Tiramisu",
-    hint:
-      "Think soft, sweet, and a little bit elegant.",
-    wrongMessage:
-      "Not that one yet. Try the choice that feels a bit more dreamy and date-night coded.",
+    id: "1",
+    prompt: "Aku kan ingat nih hari ulang tahun mu, nahhh ulang tahunku kapan?",
+    choices: [
+      "16 Februari 2007",
+      "6 Maret 2007",
+      "19 Maret 2007",
+      "16 maret 2007"
+    ],
+    correctChoice: "16 maret 2007",
+    hint: "Pertengahan bulan maret nih, jangan sampai salah ya!",
+    wrongMessage: "Masa hari lahirku sendiri kamu lupa sih? Coba diingat-ingat lagi!",
   },
   {
-    id: "B",
-    prompt: "What little thing about us makes me smile the most?",
+    id: "2",
+    prompt: "Apa yang paling kamu ga suka?",
     choices: [
-      "Fancy gifts only",
-      "Random quiet talks",
-      "Being ignored all day",
-      "Awkward silence forever",
+      "Aku",
+      "Manusia",
+      "Hidup",
+      "SMEA"
     ],
-    correctChoice: "Random quiet talks",
-    hint:
-      "The answer is simple and warm, not flashy.",
-    wrongMessage:
-      "Close your eyes and pick the gentlest answer. It is something small but really meaningful.",
+    correctChoice: "Hidup",
+    hint: "Cari opsi yang paling suram/relatable untukku.",
+    wrongMessage: "Hahaha salah! Coba pikirkan apa yang paling bikin capek dan ga disukai.",
   },
   {
-    id: "C",
-    prompt: "Why did I make this birthday space for you?",
+    id: "3",
+    prompt: "Nah sekarang sebutkan kapan awal kali kita bertemu",
     choices: [
-      "Just to test CSS",
-      "Because your day matters to me",
-      "Because I was bored",
-      "To make it look complicated",
+      "10 maret 2022",
+      "7 maret",
+      "10 maret 2024",
+      "7 maret 2024"
     ],
-    correctChoice: "Because your day matters to me",
-    hint:
-      "Choose the answer with the most heart in it.",
-    wrongMessage:
-      "Nope, this page was never about being random. Pick the one that feels sincere.",
+    correctChoice: "10 maret 2024",
+    hint: "Awal tahun 2024, di bulan maret tanggal genap.",
+    wrongMessage: "Yahhh, masa momen penting awal kita ketemu lupa? Coba lagi!",
   },
+  {
+    id: "4",
+    prompt: "Nah untuk last nya ak mw nanya nih, apa yang paling kmu suka.",
+    choices: [
+      "aku",
+      "opsi a",
+      "opsi b",
+      "semua benar"
+    ],
+    correctChoice: "semua benar",
+    hint: "Pikirkan baik-baik, bukankah semuanya merujuk pada hal yang sama?",
+    wrongMessage: "Pilihanmu kurang tepat! Pilih jawaban yang paling benar dan paling manis.",
+  }
 ];
+
