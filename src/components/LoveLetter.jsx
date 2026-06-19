@@ -41,7 +41,7 @@ function LoveLetter({ progressItems }) {
               </div>
             </div>
 
-            <h2 className="love-letter-subheader">My Love, Clara</h2>
+            <h2 className="love-letter-subheader">My Love, Sabrina</h2>
 
             <div className="letter-body-content">
               {isOpen ? (

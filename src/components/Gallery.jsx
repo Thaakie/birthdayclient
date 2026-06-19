@@ -17,7 +17,7 @@ function Gallery({ progressItems, onComplete }) {
        
           <h2>Our Memories</h2>
           <StoryText
-            text="This is the gallery page, separated from the dashboard so it feels like its own chapter instead of one long landing page."
+            text="This page is prepared for our future photos. But... there should be photos here, right? Hmm, what if we start filling it up after this, matching the titles? >_<"
             delay={150}
             speed={60}
           />
@@ -30,7 +30,7 @@ function Gallery({ progressItems, onComplete }) {
               className="memory-card memory-card-animated"
               style={{
                 animationDelay: `${0.2 + index * 0.12}s`,
-                "--rot": index === 0 ? "-3.2deg" : index === 1 ? "2.5deg" : index === 2 ? "-1.8deg" : "3deg"
+                "--rot": index % 4 === 0 ? "-3.2deg" : index % 4 === 1 ? "2.5deg" : index % 4 === 2 ? "-1.8deg" : "3deg"
               }}
             >
               {/* Decorative Pushpin */}
@@ -44,7 +44,14 @@ function Gallery({ progressItems, onComplete }) {
                 </svg>
               </div>
 
-              <div className={`memory-photo ${memory.tone}`} />
+              <div className={`memory-photo ${memory.tone} ${memory.isPlaceholder ? "is-placeholder" : ""}`}>
+                {memory.isPlaceholder && (
+                  <div className="polaroid-placeholder-overlay">
+                    <span className="polaroid-placeholder-question">?</span>
+                    <span className="polaroid-placeholder-text">Soon! ❤️</span>
+                  </div>
+                )}
+              </div>
               <strong>{memory.title}</strong>
               <span>{memory.caption}</span>
             </article>

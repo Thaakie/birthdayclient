@@ -3,21 +3,25 @@ export const memories = [
     title: "The Beginning",
     caption: "The first spark that quietly stayed with me.",
     tone: "memory-1",
+    isPlaceholder: true,
   },
   {
     title: "First Date",
     caption: "A calm, lovely day I still replay often.",
     tone: "memory-2",
+    isPlaceholder: true,
   },
   {
     title: "Sunset",
     caption: "That golden-hour feeling that looked better with you in it.",
     tone: "memory-3",
+    isPlaceholder: true,
   },
   {
-    title: "Together",
-    caption: "The kind of frame that makes forever feel believable.",
+    title: "Together?",
+    caption: "Reserved for our first photo together. Soon! ❤️",
     tone: "memory-4",
+    isPlaceholder: true,
   },
 ];
 

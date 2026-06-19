@@ -49,13 +49,13 @@ function Angry() {
             mw di pukul?
           </p>
           <p style={{ marginTop: "10px", fontSize: "0.95rem", color: "#7d5360", lineHeight: "1.6" }}>
-            Masa tebakan tentang aku salah terus... Sini minta maaf dulu terus coba lagi! 🥺👉👈
+              uda nyerah aja nie?
           </p>
         </div>
 
         <div className="answer-row reveal reveal-3">
           <button type="button" className="primary-button" onClick={handleRetry}>
-            Minta Maaf & Main Lagi 🥺
+            Main Lagi 
           </button>
         </div>
       </section>

@@ -1093,6 +1093,83 @@
   background-image: linear-gradient(160deg, #d4c7a4, #c8e2c1 55%, #94b081);
 }
 
+/* Polaroid Placeholder Styles */
+.memory-photo.is-placeholder {
+  border: 2px dashed rgba(242, 138, 165, 0.52);
+  /* Keep the background gradient from the specific memory tone classes */
+}
+
+.polaroid-placeholder-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* Beautiful semi-transparent diagonal stripes that overlay on top of gradients */
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.08) 10px,
+    rgba(255, 255, 255, 0.22) 10px,
+    rgba(255, 255, 255, 0.22) 20px
+  );
+  backdrop-filter: blur(0.5px);
+  transition: background-image 0.3s ease, background-color 0.3s ease;
+}
+
+.polaroid-placeholder-question {
+  display: block;
+  font-size: 3.8rem !important;
+  font-weight: 800;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.95) !important;
+  text-shadow: 
+    -2px -2px 0 #f28aa5,  
+     2px -2px 0 #f28aa5,
+    -2px  2px 0 #f28aa5,
+     2px  2px 0 #f28aa5,
+     0px 4px 8px rgba(242, 138, 165, 0.4) !important;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.08));
+  animation: floatQuestion 2.4s infinite ease-in-out;
+}
+
+.polaroid-placeholder-text {
+  font-size: 0.72rem !important;
+  font-weight: 700;
+  color: #df6c8e !important;
+  margin-top: 8px;
+  opacity: 0.85;
+  letter-spacing: 0.05em;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 3px 10px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(242, 138, 165, 0.15);
+  transition: transform 0.3s ease, opacity 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.memory-card:hover .polaroid-placeholder-overlay {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.memory-card:hover .polaroid-placeholder-text {
+  transform: scale(1.08) translateY(-1px);
+  opacity: 1;
+  background: #fff0f3;
+  color: #c45f86 !important;
+  box-shadow: 0 4px 10px rgba(242, 138, 165, 0.25);
+}
+
+@keyframes floatQuestion {
+  0%, 100% {
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-5px) scale(1.06) rotate(3deg);
+  }
+}
+
+
 .reasons-grid,
 .progress-grid {
   display: grid;
