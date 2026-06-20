@@ -17,7 +17,7 @@ function Gallery({ progressItems, onComplete }) {
        
           <h2>Our Memories</h2>
           <StoryText
-            text="This page is prepared for our future photos. But... there should be photos here, right? Hmm, what if we start filling it up after this, matching the titles? >_<"
+            text="This page is prepared for our pictures. But... there should be photos here, right? Hmm, what if we start filling it up after this, matching the titles? >_<"
             delay={150}
             speed={60}
           />

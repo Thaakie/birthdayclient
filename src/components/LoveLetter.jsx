@@ -23,11 +23,11 @@ function LoveLetter({ progressItems }) {
               <div className="letter-metadata">
                 <div className="meta-field">
                   <span className="meta-label">TO:</span>
-                  <span className="meta-value">Clara</span>
+                  <span className="meta-value">Sabrina</span>
                 </div>
                 <div className="meta-field">
                   <span className="meta-label">FROM:</span>
-                  <span className="meta-value">Allen</span>
+                  <span className="meta-value">Rezy</span>
                 </div>
               </div>
 
@@ -49,19 +49,54 @@ function LoveLetter({ progressItems }) {
                   <StoryText
                     text="My dearest,"
                     delay={300}
-                    speed={60}
+                    speed={50}
                     style={{ fontWeight: "bold", display: "block", marginBottom: "12px", fontFamily: "Georgia, serif" }}
                   />
                   <StoryText
-                    text="Thank you for being one of the softest, brightest parts of my world. I wanted this whole birthday project to feel less like a website and more like a sequence of little feelings made visible."
+                    text="Happy Birthday, love."
                     delay={700}
+                    speed={50}
+                    style={{ display: "block", marginBottom: "12px" }}
+                  />
+                  <br />
+                  <StoryText
+                    text="Thank you for being the kindest, softest, and brightest part of my life. You make ordinary days feel special just by being yourself, and I hope you never forget how deeply loved you are."
+                    delay={1100}
                     speed={45}
+                    style={{ display: "block", marginBottom: "12px" }}
+                  />
+                  <br />
+                  <StoryText
+                    text="I didn't want this birthday gift to be just another website. I wanted it to hold a little piece of my heart—a place where I could put all the little things I feel for you but don't always know how to say out loud."
+                    delay={3000}
+                    speed={45}
+                    style={{ display: "block", marginBottom: "12px" }}
+                  />
+                  <br />
+                  <StoryText
+                    text="I hope today brings you lots of smiles, peaceful moments, and everything that makes you happy. You deserve all the love, kindness, and happiness this world has to offer."
+                    delay={5200}
+                    speed={45}
+                    style={{ display: "block", marginBottom: "12px" }}
                   />
                   <StoryText
-                    text="I hope this day holds calm joy, pretty moments, and every kind of love you deserve. If this page could hug you, it would."
-                    delay={2200}
+                    text="And if this page could do one more thing, I hope it could give you the biggest hug and remind you that no matter where we are, a part of my heart is always with you."
+                    delay={7000}
                     speed={45}
-                    style={{ marginTop: "14px", display: "block" }}
+                    style={{ display: "block", marginBottom: "12px" }}
+                  />
+                  <br />
+                  <StoryText
+                    text="Happy Birthday, my love."
+                    delay={9000}
+                    speed={50}
+                    style={{ display: "block", marginBottom: "12px" }}
+                  />
+                  <StoryText
+                    text="I love you, always."
+                    delay={9600}
+                    speed={50}
+                    style={{ display: "block" }}
                   />
                 </>
               ) : (
@@ -73,8 +108,8 @@ function LoveLetter({ progressItems }) {
               {isOpen && (
                 <StoryText
                   className="signature"
-                  text="—your bf, Allen"
-                  delay={4500}
+                  text="—your bf, eji"
+                  delay={10200}
                   speed={60}
                 />
               )}
@@ -110,7 +145,7 @@ function LoveLetter({ progressItems }) {
             className="love-letter-actions"
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 5.5, duration: 0.6 }}
+            transition={{ delay: 11.0, duration: 0.6 }}
           >
             <Link to="/gallery" className="back-button-tab love-letter-btn-secondary">
               Kembali
