@@ -14,10 +14,7 @@ function Games({ progressItems, onComplete }) {
   const [lives, setLives] = useState(3);
 
   const currentQuestion = questions[activeQuestion];
-  const progressLabel = useMemo(
-    () => `${activeQuestion + 1} / ${questions.length}`,
-    [activeQuestion],
-  );
+  const progressLabel = useMemo(() => `${activeQuestion + 1} / ${questions.length}`, [activeQuestion]);
 
   const handleChoice = (choice) => {
     setSelectedChoice(choice);
@@ -65,13 +62,8 @@ function Games({ progressItems, onComplete }) {
 
       <section className="shell-card page-scene quiz-scene">
         <div className="section-heading reveal reveal-1">
-        
           <h2>Birthday Questions</h2>
-          <StoryText
-            text="Answer them one by one. The next page only opens after every answer is correct."
-            delay={160}
-            speed={62}
-          />
+          <StoryText text="A few little questions for you, each right answer unlocks the next surprise." delay={160} speed={62} />
         </div>
 
         <div className="quiz-header reveal reveal-2" aria-hidden="true">
@@ -95,28 +87,15 @@ function Games({ progressItems, onComplete }) {
             >
               <span className="story-badge">Question {currentQuestion.id}</span>
               <h3>{currentQuestion.prompt}</h3>
-              <StoryText
-                text={currentQuestion.hint}
-                className="quiz-hint"
-                delay={120}
-                speed={60}
-              />
+              <StoryText text={currentQuestion.hint} className="quiz-hint" delay={120} speed={60} />
 
               <div className="quiz-choice-grid">
                 {currentQuestion.choices.map((choice) => {
                   const isActive = selectedChoice === choice;
-                  const isCorrect =
-                    selectedChoice === currentQuestion.correctChoice &&
-                    choice === currentQuestion.correctChoice;
+                  const isCorrect = selectedChoice === currentQuestion.correctChoice && choice === currentQuestion.correctChoice;
 
                   return (
-                    <button
-                      key={choice}
-                      type="button"
-                      className={`quiz-choice ${isActive ? "is-active" : ""} ${isCorrect ? "is-correct" : ""}`}
-                      onClick={() => handleChoice(choice)}
-                      disabled={isComplete}
-                    >
+                    <button key={choice} type="button" className={`quiz-choice ${isActive ? "is-active" : ""} ${isCorrect ? "is-correct" : ""}`} onClick={() => handleChoice(choice)} disabled={isComplete}>
                       {choice}
                     </button>
                   );
@@ -135,12 +114,7 @@ function Games({ progressItems, onComplete }) {
 
       {wrongPopup ? (
         <div className="quiz-popup-backdrop" role="presentation">
-          <div
-            className="quiz-popup"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="wrong-answer-title"
-          >
+          <div className="quiz-popup" role="dialog" aria-modal="true" aria-labelledby="wrong-answer-title">
             <p className="quiz-popup-kicker">Wrong answer</p>
             <div style={{ margin: "12px auto 16px", display: "flex", justifyContent: "center" }}>
               <img
@@ -152,7 +126,7 @@ function Games({ progressItems, onComplete }) {
                   objectFit: "cover",
                   borderRadius: "12px",
                   border: "4px solid #fff",
-                  boxShadow: "0 6px 16px rgba(125, 64, 83, 0.15)"
+                  boxShadow: "0 6px 16px rgba(125, 64, 83, 0.15)",
                 }}
               />
             </div>

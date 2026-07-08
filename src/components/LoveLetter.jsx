@@ -27,7 +27,7 @@ function LoveLetter({ progressItems }) {
                 </div>
                 <div className="meta-field">
                   <span className="meta-label">FROM:</span>
-                  <span className="meta-value">Rezy</span>
+                  <span className="meta-value">Arif</span>
                 </div>
               </div>
 
@@ -46,18 +46,8 @@ function LoveLetter({ progressItems }) {
             <div className="letter-body-content">
               {isOpen ? (
                 <>
-                  <StoryText
-                    text="My dearest,"
-                    delay={300}
-                    speed={50}
-                    style={{ fontWeight: "bold", display: "block", marginBottom: "12px", fontFamily: "Georgia, serif" }}
-                  />
-                  <StoryText
-                    text="Happy Birthday, love."
-                    delay={700}
-                    speed={50}
-                    style={{ display: "block", marginBottom: "12px" }}
-                  />
+                  <StoryText text="My dearest," delay={300} speed={50} style={{ fontWeight: "bold", display: "block", marginBottom: "12px", fontFamily: "Georgia, serif" }} />
+                  <StoryText text="Happy Birthday, love." delay={700} speed={50} style={{ display: "block", marginBottom: "12px" }} />
                   <br />
                   <StoryText
                     text="Thank you for being the kindest, softest, and brightest part of my life. You make ordinary days feel special just by being yourself, and I hope you never forget how deeply loved you are."
@@ -86,43 +76,22 @@ function LoveLetter({ progressItems }) {
                     style={{ display: "block", marginBottom: "12px" }}
                   />
                   <br />
-                  <StoryText
-                    text="Happy Birthday, my love."
-                    delay={9000}
-                    speed={50}
-                    style={{ display: "block", marginBottom: "12px" }}
-                  />
-                  <StoryText
-                    text="I love you, always."
-                    delay={9600}
-                    speed={50}
-                    style={{ display: "block" }}
-                  />
+                  <StoryText text="Happy Birthday, my love." delay={9000} speed={50} style={{ display: "block", marginBottom: "12px" }} />
+                  <StoryText text="I love you, always." delay={9600} speed={50} style={{ display: "block" }} />
                 </>
               ) : (
                 <p style={{ opacity: 0 }}>Letter content hidden</p>
               )}
             </div>
 
-            <div className="letter-footer">
-              {isOpen && (
-                <StoryText
-                  className="signature"
-                  text="—your bf, eji"
-                  delay={10200}
-                  speed={60}
-                />
-              )}
-            </div>
+            <div className="letter-footer">{isOpen && <StoryText className="signature" text="—your bf, eji" delay={10200} speed={60} />}</div>
 
             {/* Made with love circular stamp */}
             <div className="made-with-love-stamp">
               <svg viewBox="0 0 100 100" width="75" height="75">
                 <path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="none" />
                 <text fontFamily="monospace" fontSize="8.5" fill="rgba(122, 29, 36, 0.35)" letterSpacing="0.8">
-                  <textPath xlinkHref="#circlePath">
-                    MADE WITH LOVE • ALWAYS & FOREVER •
-                  </textPath>
+                  <textPath xlinkHref="#circlePath">MADE WITH LOVE • ALWAYS & FOREVER •</textPath>
                 </text>
                 <path d="M 42 50 A 8 8 0 0 1 58 50 A 8 8 0 0 1 42 50 Z" fill="rgba(122, 29, 36, 0.08)" />
                 <path d="M 46 48 C 46 45, 54 45, 54 48 C 54 52, 50 54, 50 56 C 50 54, 46 52, 46 48 Z" fill="rgba(122, 29, 36, 0.2)" />
@@ -141,12 +110,7 @@ function LoveLetter({ progressItems }) {
 
         {/* Actions positioned inline under envelope, fading in */}
         {isOpen && (
-          <motion.div
-            className="love-letter-actions"
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 11.0, duration: 0.6 }}
-          >
+          <motion.div className="love-letter-actions" initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 11.0, duration: 0.6 }}>
             <Link to="/gallery" className="back-button-tab love-letter-btn-secondary">
               Kembali
             </Link>
